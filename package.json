@@ -52,7 +52,6 @@
     "tiny-lr": "1.0.3",
     "tslint": "3.15.1",
     "tslint-eslint-rules": "1.5.0",
-    "typescript": "^2.0.3",
     "uglify-js": "2.7.3",
     "webpack": "^2.1.0-beta.25",
     "ws": "^1.1.1"
@@ -78,6 +77,10 @@
     "rimraf": "^2.5.4",
     "tslint": "3.15.1",
     "tslint-ionic-rules": "0.0.5"
+  },
+  "peerDependencies": {
+    "@angular/compiler-cli": "*",
+    "typescript": "*"
   },
   "repository": {
     "type": "git",
