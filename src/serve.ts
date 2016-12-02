@@ -1,5 +1,6 @@
 import { BuildContext } from './util/interfaces';
 import { generateContext, getConfigValue, hasConfigValue } from './util/config';
+import { setContext } from './util/helpers';
 import { Logger } from './logger/logger';
 import { watch } from './watch';
 import open from './util/open';
@@ -16,13 +17,14 @@ const DEV_SERVER_DEFAULT_HOST = '0.0.0.0';
 
 export function serve(context?: BuildContext) {
   context = generateContext(context);
-
+  setContext(context);
   const config: ServeConfig = {
     httpPort: getHttpServerPort(context),
     host: getHttpServerHost(context),
     rootDir: context.rootDir,
     wwwDir: context.wwwDir,
     buildDir: context.buildDir,
+    isCordovaServe: isCordovaServe(context),
     launchBrowser: launchBrowser(context),
     launchLab: launchLab(context),
     browserToLaunch: browserToLaunch(context),
@@ -97,6 +99,10 @@ export function getNotificationPort(context: BuildContext) {
 
 function useServerLogs(context: BuildContext) {
   return hasConfigValue(context, '--serverlogs', '-s', 'ionic_serverlogs', false);
+}
+
+function isCordovaServe(context: BuildContext) {
+  return hasConfigValue(context, '--iscordovaserve', '-z', 'ionic_cordova_serve', false);
 }
 
 function launchBrowser(context: BuildContext) {
